@@ -71,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            mWordList.clear();
+            for (int i = 1; i < 21; i++) {
+                mWordList.add("Word " + i);
+            }
+            Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
             return true;
         }
 
