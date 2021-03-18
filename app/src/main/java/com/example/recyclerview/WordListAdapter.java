@@ -18,7 +18,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     // a ViewHolder class is required to describe a view item and its position within the recycler view
     // prepare data in a ViewHolder
     // viewHolder initializes items for the RecyclerView (efficiency)
-    class WordViewHolder extends RecyclerView.ViewHolder{
+    class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         final TextView wordItemView;
         final WordListAdapter mAdapter;
 
@@ -27,9 +27,19 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             super(itemView);
             wordItemView = itemView.findViewById(R.id.word);
             this.mAdapter = adapter;
+            itemView.setOnClickListener(this);
         }
 
-
+        // onclick method implemented here
+        // get position of item clicked, use position to get the item from linked list, make changes and
+        // notify the adapter that there has been a change so it can update recyclerView
+        @Override
+        public void onClick(View v) {
+            int mPosition = getLayoutPosition();
+            String element = mWordList.get(mPosition);
+            mWordList.set(mPosition, "Clicked! " + element);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     // get inflater from current context and data in this constructor

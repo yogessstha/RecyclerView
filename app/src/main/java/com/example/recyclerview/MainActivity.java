@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private final LinkedList<String> mWordList = new LinkedList<>();
@@ -32,8 +33,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                int wordListSize = mWordList.size();
+                // add new word to the linked list
+                mWordList.addLast("+ Word " + wordListSize);
+                // notify adapter of data change
+                Objects.requireNonNull(mRecyclerView.getAdapter()).notifyItemInserted(wordListSize);
+                // scroll to the bottom of the list
+                mRecyclerView.smoothScrollToPosition(wordListSize);
             }
         });
         for (int i = 0; i < 20; i++) {
