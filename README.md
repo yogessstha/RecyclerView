@@ -1,3 +1,3 @@
-<h1>Recycler View</h1>
+## Recycler View
 ![](screenrecord2.gif)
 
